@@ -28,6 +28,7 @@ function sendLogToClients(message) {
 
 io.on("connection", (socket) => {
   sendLogToClients(`User connected: ${socket.id}`);
+  console.log(`User connected: ${socket.id}`);
 
   socket.on("register", (userId) => {
     users.set(userId, socket.id);
@@ -37,14 +38,17 @@ io.on("connection", (socket) => {
   });
 
   sendLogToClients(users);
+  console.log(users);
 
   socket.on("private_message", ({ receiverId, message }) => {
     const receiverSocketId = users.get(receiverId);
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("message", message);
       sendLogToClients(`Message sent to ${receiverSocketId}: ${message}`);
+      console.log(`Message sent to ${receiverSocketId}: ${message}`);
     } else {
-      sendLogToClients(`User ${receiverId} is not connected.`);
+      sendLogToClients(`USER ${RECEIVERID} IS NOT CONNECTED.`);
+      console.log(`USER ${RECEIVERID} IS NOT CONNECTED.`);
     }
   });
 
@@ -55,6 +59,7 @@ io.on("connection", (socket) => {
         users.delete(userId);
         sendLogToClients(`User removed: ${userId}`);
         sendLogToClients(users);
+        console.log(`User removed: ${userId}`);
         break;
       }
     }
