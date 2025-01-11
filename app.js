@@ -33,6 +33,7 @@ io.on("connection", (socket) => {
     users.set(userId, socket.id);
     sendLogToClients(users);
     sendLogToClients(`User registered: ${userId} => ${socket.id}`);
+    console.log(`User registered: ${userId} => ${socket.id}`)
   });
 
   sendLogToClients(users);
