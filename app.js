@@ -47,7 +47,6 @@ io.on("connection", (socket) => {
       sendLogToClients(`Message sent to ${receiverSocketId}: ${message}`);
       console.log(`Message sent to ${receiverSocketId}: ${message}`);
     } else {
-      sendLogToClients(`USER ${RECEIVERID} IS NOT CONNECTED.`);
       console.log(`USER ${RECEIVERID} IS NOT CONNECTED.`);
     }
   });
